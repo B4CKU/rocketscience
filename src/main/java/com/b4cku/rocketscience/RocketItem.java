@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 
 public class RocketItem extends Item {
 
+    private final int COOLDOWN_IN_TICKS = 20;
+
     public RocketItem(Settings settings) {
         super(settings);
     }
@@ -20,22 +22,19 @@ public class RocketItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand); // creates a new ItemStack instance of the user's itemStack in-hand
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 1F); // plays a globalSoundEvent
-		user.getItemCooldownManager().set(this, 20);
+		user.getItemCooldownManager().set(this, COOLDOWN_IN_TICKS);
         if (!world.isClient) {
             RocketEntity rocketEntity = new RocketEntity(world, user);
             rocketEntity.setItem(itemStack);
             float pitch = user.getPitch();
             float yaw = user.getYaw();
             rocketEntity.setVelocity(user, pitch, yaw, 0.0F, 1.5F, 0F);
-                        /*
-                        snowballEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-                        In 1.17,we will use setProperties instead of setVelocity.
-                        */
-            //rocketEntity.setPitch(pitch);
-            //rocketEntity.setYaw(yaw);
             world.spawnEntity(rocketEntity); // spawns entity
-            rocketEntity.setPitch(pitch);
-            rocketEntity.setYaw(yaw);
+
+            //because for technical reasons rockets fly backwards
+            rocketEntity.setPitch(pitch + 180.0F);
+            rocketEntity.setYaw(yaw + 180.0F);
+
             user.startRiding(rocketEntity);
         }
 

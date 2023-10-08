@@ -1,3 +1,4 @@
 {
-    "item.rocketscience.rocket": "Large Rocket"
+  "entity.rocketscience.rocket": "Rideable Rocket",
+  "item.rocketscience.rocket": "Large Rocket"
 }

@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "rocketscience",
+	"version": "${version}",
+	"name": "Rocket Science",
+	"description": "Rocket go zoom!",
+	"authors": [
+		"backu"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/rocketscience/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.b4cku.rocketscience.RocketScience"
+		],
+		"client": [
+			"com.b4cku.rocketscience.RocketScienceClient"
+		]
+	},
+	"mixins": [
+		"rocketscience.mixins.json",
+		{
+			"config": "rocketscience.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.22",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

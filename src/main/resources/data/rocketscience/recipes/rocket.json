@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "FPP",
+    "CCC"
+  ],
+  "key": {
+    "F": [
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "C": [
+      {
+        "item": "minecraft:paper"
+      }
+    ],
+    "P": [
+      {
+        "item": "minecraft:gunpowder"
+      }
+    ]
+  },
+  "result": {
+    "item": "rocketscience:rocket"
+  }
+}

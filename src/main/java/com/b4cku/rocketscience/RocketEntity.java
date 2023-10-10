@@ -53,12 +53,12 @@ public class RocketEntity extends ThrownItemEntity {
 
         //finally found a way to check pilot's inputs
         //this does NOT check for velocity, it's actually inputs
-        float fw = pilot.forwardSpeed;
+        float forwardInput = pilot.forwardSpeed;
         //forward = positive
-        float sw = pilot.sidewaysSpeed;
+        float sidewaysInput = pilot.sidewaysSpeed;
         //left = positive
 
-        Vec3d target_velocity = this.getVelocity().rotateY(sw * TURNING_SENSITIVITY).rotateX(fw * TURNING_SENSITIVITY);
+        Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY).rotateX(forwardInput * TURNING_SENSITIVITY);
         this.setVelocity(target_velocity);
     }
 

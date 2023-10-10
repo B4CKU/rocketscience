@@ -60,8 +60,6 @@ public class RocketEntity extends ThrownItemEntity {
 
         Vec3d target_velocity = this.getVelocity().rotateY(sw * TURNING_SENSITIVITY).rotateX(fw * TURNING_SENSITIVITY);
         this.setVelocity(target_velocity);
-
-        //System.out.print("fw:"+fw+" sw:"+sw+"\n");
     }
 
     protected float getGravity() {
@@ -105,7 +103,8 @@ public class RocketEntity extends ThrownItemEntity {
     private void blowUp() {
         this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), ROCKET_EXPLOSION_POWER, false, World.ExplosionSourceType.NONE);
         this.getWorld().sendEntityStatus(this, (byte)3); // particle?
-        this.kill(); // kills the projectile
+        //i have no clue what the above line does, but it was there in the fabric documentation's entity example
+        this.kill();
     }
 
 }

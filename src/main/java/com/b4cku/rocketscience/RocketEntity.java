@@ -11,8 +11,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import static com.b4cku.rocketscience.RocketUtil.rotateVectorHorizontalAxis;
-
 public class RocketEntity extends ThrownItemEntity {
 
     private final float ROCKET_EXPLOSION_POWER = 2.0f;
@@ -60,14 +58,12 @@ public class RocketEntity extends ThrownItemEntity {
         float sidewaysInput = pilot.sidewaysSpeed;
         //left = positive
 
-        //Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY).rotateX(forwardInput * TURNING_SENSITIVITY);
-
         Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY);
-        target_velocity = rotateVectorHorizontalAxis(target_velocity, forwardInput * TURNING_SENSITIVITY);
 
-        //double length = this.getVelocity().length();
-        //Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY).add(0,forwardInput * TURNING_SENSITIVITY,0).normalize().multiply(length);
-        //god, this is so janky
+        final Vec3d temp = target_velocity.normalize();
+        target_velocity = target_velocity.rotateX((float)temp.getZ() * -forwardInput * TURNING_SENSITIVITY).rotateZ((float)temp.getX() * forwardInput * TURNING_SENSITIVITY);
+        //ihatemyselfihatemyselfihatemyselfihatemyselfihatemyselfihatemyself
+        //i will leave the above comment here just as a reminder that i'm an absolute idiot
 
         this.setVelocity(target_velocity);
     }

@@ -11,6 +11,8 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import static com.b4cku.rocketscience.RocketUtil.rotateVectorHorizontalAxis;
+
 public class RocketEntity extends ThrownItemEntity {
 
     private final float ROCKET_EXPLOSION_POWER = 2.0f;
@@ -39,7 +41,7 @@ public class RocketEntity extends ThrownItemEntity {
     public void tick() {
         super.tick();
         handleInputs();
-        if (this.random.nextInt(3) == 0) {
+        if (this.random.nextInt(2) == 0) {
             //TODO: i should probably move those back to the rocket's exhaust
             this.getWorld().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
         }
@@ -58,7 +60,15 @@ public class RocketEntity extends ThrownItemEntity {
         float sidewaysInput = pilot.sidewaysSpeed;
         //left = positive
 
-        Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY).rotateX(forwardInput * TURNING_SENSITIVITY);
+        //Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY).rotateX(forwardInput * TURNING_SENSITIVITY);
+
+        Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY);
+        target_velocity = rotateVectorHorizontalAxis(target_velocity, forwardInput * TURNING_SENSITIVITY);
+
+        //double length = this.getVelocity().length();
+        //Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY).add(0,forwardInput * TURNING_SENSITIVITY,0).normalize().multiply(length);
+        //god, this is so janky
+
         this.setVelocity(target_velocity);
     }
 
@@ -101,10 +111,11 @@ public class RocketEntity extends ThrownItemEntity {
     }
 
     private void blowUp() {
+        this.kill(); //i moved it here to remove the crash when it explodes near to another rocket, i hope it doesn't bite me in the ass later
         this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), ROCKET_EXPLOSION_POWER, false, World.ExplosionSourceType.NONE);
         this.getWorld().sendEntityStatus(this, (byte)3); // particle?
         //i have no clue what the above line does, but it was there in the fabric documentation's entity example
-        this.kill();
+        //this.kill();
     }
 
 }

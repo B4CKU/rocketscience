@@ -80,7 +80,6 @@ public class RocketEntity extends ThrownItemEntity {
         //i really want to add that, but i'm afraid it'll be really fucking heavy on the physics engine and will tank the performance
         //think how many times per second gravity calculations are performed, do we really want to check for a passenger this many times per second?
 
-
         return 0.02F;
     }
 
@@ -98,7 +97,6 @@ public class RocketEntity extends ThrownItemEntity {
         if (!this.getWorld().isClient) { // checks if the world is client
             blowUp();
         }
-
     }
 
     public boolean damage(DamageSource source, float amount) {
@@ -117,5 +115,4 @@ public class RocketEntity extends ThrownItemEntity {
         //i have no clue what the above line does, but it was there in the fabric documentation's entity example
         //this.kill();
     }
-
 }

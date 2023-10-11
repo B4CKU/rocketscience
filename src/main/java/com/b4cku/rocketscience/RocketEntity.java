@@ -61,7 +61,7 @@ public class RocketEntity extends ThrownItemEntity {
         Vec3d target_velocity = this.getVelocity().rotateY(sidewaysInput * TURNING_SENSITIVITY);
 
         final Vec3d temp = target_velocity.normalize();
-        target_velocity = target_velocity.rotateX((float)temp.getZ() * -forwardInput * TURNING_SENSITIVITY).rotateZ((float)temp.getX() * forwardInput * TURNING_SENSITIVITY);
+        target_velocity = target_velocity.rotateX((float)temp.getZ() * forwardInput * TURNING_SENSITIVITY).rotateZ((float)temp.getX() * -forwardInput * TURNING_SENSITIVITY);
         //ihatemyselfihatemyselfihatemyselfihatemyselfihatemyselfihatemyself
         //i will leave the above comment here just as a reminder that i'm an absolute idiot
 

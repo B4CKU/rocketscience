@@ -12,12 +12,7 @@ public class RocketScienceClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-
-
 		EntityRendererRegistry.register(RocketScience.ROCKET_ENTITY_ENTITY_TYPE, RocketEntityRenderer::new);
-
 		EntityModelLayerRegistry.registerModelLayer(MODEL_ROCKET_LAYER, RocketEntityModel::getTexturedModelData);
-
-		//EntityRendererRegistry.register(RocketScience.ROCKET_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
 	}
 }

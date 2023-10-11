@@ -9,9 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class RocketEntityModel<T extends RocketEntity> extends EntityModel<T> {
     private final ModelPart fins;
-    //private final ModelPart fin_r1;
     private final ModelPart body;
-    //private final ModelPart body_r1;
     public RocketEntityModel(ModelPart root) {
         this.fins = root.getChild("fins");
         this.body = root.getChild("body");

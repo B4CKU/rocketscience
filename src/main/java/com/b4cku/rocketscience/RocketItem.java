@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 public class RocketItem extends Item {
 
     private final int COOLDOWN_IN_TICKS = 20;
-    private final float ROCKET_INITIAL_SPEED = 1.5f;
 
     public RocketItem(Settings settings) {
         super(settings);
@@ -29,7 +28,7 @@ public class RocketItem extends Item {
             rocketEntity.setItem(itemStack);
             float pitch = user.getPitch();
             float yaw = user.getYaw();
-            rocketEntity.setVelocity(user, pitch, yaw, 0.0F, ROCKET_INITIAL_SPEED, 0F);
+            rocketEntity.setVelocity(user, pitch, yaw, 0.0F, RocketEntity.TARGET_ROCKET_SPEED, 0F);
             world.spawnEntity(rocketEntity); // spawns entity
 
             //because for technical reasons rockets fly backwards
